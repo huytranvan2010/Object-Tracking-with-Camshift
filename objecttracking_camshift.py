@@ -47,9 +47,10 @@ while True:
         ret, track_window = cv2.CamShift(dst, track_window, term_crit)
 
         # Draw it on image
-        pts = cv2.boxPoints(ret)
-        pts = np.int0(pts)
-        img = cv2.polylines(frame, [pts],True, 255, 2)
+        pts = cv2.boxPoints(ret)    # trả về 4 đỉnh của
+        pts = np.int0(pts)      # chuyển từ float về int để nó còn vẽ được
+        # Vẽ tracking window lên frame
+        img = cv2.polylines(frame, [pts], True, 255, 2)
         cv2.imshow('img', img)
 
         k = cv2.waitKey(30) & 0xff
@@ -58,4 +59,5 @@ while True:
     else:
         break
 
+video.release()
 cv2.destroyAllWindows()
